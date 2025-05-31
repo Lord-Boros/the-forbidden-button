@@ -1,0 +1,3217 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Useless Button</title>
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=YOUR_GA_ID"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'YOUR_GA_ID');
+    </script>
+    
+    <!-- Social Media Meta Tags -->
+    <meta property="og:title" content="Useless Button - Don't Click It!" />
+    <meta property="og:description" content="A fun, interactive button with amazing effects and premium features. Try not to click it!" />
+    <meta property="og:image" content="https://your-domain.com/preview.png" />
+    <meta property="og:url" content="https://your-domain.com" />
+    <meta name="twitter:card" content="summary_large_image" />
+    
+    <!-- Social Media Share Buttons -->
+    <script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=YOUR_SHARETHIS_ID&product=inline-share-buttons" async="async"></script>
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 100px;
+            cursor: default;
+            background-color: #f0f0f0;
+            transition: all 0.3s;
+            overflow-x: hidden;
+            min-height: 100vh;
+            margin: 0;
+            padding-top: 100px;
+            perspective: 1000px;
+        }
+        #annoying-button {
+            padding: 20px 40px;
+            font-size: 24px;
+            background: #ff4444;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 5px #cc0000;
+            transition: all 0.3s ease;
+            position: relative;
+            user-select: none;
+            z-index: 100;
+        }
+        #annoying-button:hover {
+            transform: scale(1.1);
+        }
+        #click-counter {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+            font-weight: bold;
+        }
+        .warning {
+            color: #ff4444;
+            font-size: 32px;
+            margin-bottom: 30px;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .confetti {
+            position: fixed;
+            pointer-events: none;
+            z-index: 999;
+            animation: fall linear forwards;
+        }
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
+            }
+        }
+        #rage-meter {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .shake {
+            animation: shake 0.5s linear;
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+        .particle {
+            pointer-events: none;
+            position: fixed;
+            background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(255,68,68,0) 70%);
+            border-radius: 50%;
+            z-index: 99;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+        #combo-text {
+            position: fixed;
+            font-size: 24px;
+            font-weight: bold;
+            color: #ff4444;
+            pointer-events: none;
+            z-index: 1000;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        @keyframes spin3D {
+            from { transform: rotateX(0deg) rotateY(0deg); }
+            to { transform: rotateX(360deg) rotateY(360deg); }
+        }
+        .spin3d {
+            animation: spin3D 2s linear;
+        }
+        #power-bar {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 20px;
+            background: #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        #power-fill {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #ff4444, #ff0000);
+            transition: width 0.3s;
+        }
+        #premium-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+        .ad-container {
+            position: fixed;
+            padding: 15px;
+            background: white;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 99;
+            width: 300px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .ad-container:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .ad-banner {
+            position: fixed;
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+            padding: 10px;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            width: 100%;
+            z-index: 98;
+            cursor: pointer;
+        }
+        .ad-banner.top {
+            top: 0;
+        }
+        .ad-banner.bottom {
+            bottom: 0;
+        }
+        .ad-popup {
+            position: fixed;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            z-index: 1000;
+            max-width: 400px;
+            text-align: center;
+            display: none;
+        }
+        .ad-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+            display: none;
+        }
+        .floating-ad {
+            position: fixed;
+            animation: float-around 20s linear infinite;
+            z-index: 97;
+            pointer-events: none;
+        }
+        @keyframes float-around {
+            0% { transform: translate(0, 0); }
+            25% { transform: translate(50vw, 25vh); }
+            50% { transform: translate(75vw, 50vh); }
+            75% { transform: translate(25vw, 75vh); }
+            100% { transform: translate(0, 0); }
+        }
+        .premium-teaser {
+            position: fixed;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            padding: 20px;
+            border-radius: 10px;
+            color: white;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+            z-index: 98;
+        }
+        .close-ad {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            cursor: pointer;
+            color: #666;
+            font-weight: bold;
+        }
+        .premium-feature {
+            color: gold;
+            text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+        }
+        #premium-benefits {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+            z-index: 1001;
+            max-width: 450px;
+            color: white;
+            text-align: center;
+            border: 2px solid gold;
+        }
+        #premium-benefits h2 {
+            color: #FFD700;
+            margin-top: 0;
+            font-size: 28px;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+        #premium-benefits ul {
+            text-align: left;
+            margin: 20px 0;
+            padding-left: 20px;
+        }
+        #premium-benefits li {
+            margin: 10px 0;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        #premium-benefits li::before {
+            content: "✨";
+        }
+        .premium-price {
+            font-size: 36px;
+            color: #FFD700;
+            margin: 20px 0;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+        }
+        .premium-price span {
+            font-size: 20px;
+        }
+        .premium-button {
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 20px;
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+        }
+        .premium-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 7px 20px rgba(255, 215, 0, 0.4);
+        }
+        .premium-features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .premium-feature-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .premium-feature-card i {
+            font-size: 24px;
+            color: #FFD700;
+            margin-bottom: 10px;
+        }
+        #premium-timer {
+            color: #FFD700;
+            font-size: 18px;
+            margin-top: 15px;
+        }
+        .premium-badge {
+            position: fixed;
+            top: 70px;
+            left: 20px;
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            padding: 5px 15px;
+            border-radius: 15px;
+            color: white;
+            font-weight: bold;
+            display: none;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(255, 215, 0, 0.3);
+        }
+        #custom-theme-selector {
+            display: none;
+            position: fixed;
+            top: 120px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .premium .custom-cursor {
+            cursor: none !important;
+        }
+        .custom-cursor-dot {
+            display: none;
+            width: 10px;
+            height: 10px;
+            background: gold;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+        }
+        .custom-cursor-outline {
+            display: none;
+            width: 30px;
+            height: 30px;
+            border: 2px solid gold;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.1s;
+        }
+        .rainbow-text {
+            animation: rainbow 2s linear infinite;
+        }
+        @keyframes rainbow {
+            0% { color: red; }
+            20% { color: orange; }
+            40% { color: yellow; }
+            60% { color: green; }
+            80% { color: blue; }
+            100% { color: purple; }
+        }
+        #special-effects {
+            position: fixed;
+            top: 20px;
+            right: 120px;
+            background: rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+        }
+        .premium .ad-container {
+            display: none;
+        }
+        /* Premium button animations */
+        @keyframes buttonJump {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(var(--jump-x), var(--jump-y)); }
+        }
+        .premium .jumping-button {
+            --jump-x: 0px;
+            --jump-y: 0px;
+            position: absolute;
+            transition: none;
+            animation: buttonJump 0.5s ease;
+        }
+        /* Button trail effect */
+        .button-trail {
+            position: absolute;
+            pointer-events: none;
+            opacity: 0.5;
+            transition: opacity 0.3s;
+            z-index: 99;
+        }
+        /* Premium button glow effect */
+        .premium .glow-effect {
+            box-shadow: 0 0 20px var(--glow-color, #ff4444);
+            --glow-color: #ff4444;
+        }
+        /* Premium button size pulse */
+        @keyframes sizePulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        .premium .size-pulse {
+            animation: sizePulse 0.5s ease;
+        }
+        /* Premium button split effect */
+        .button-clone {
+            position: absolute;
+            pointer-events: none;
+            opacity: 0.5;
+            z-index: 98;
+        }
+        /* Premium power-up effects */
+        .power-up {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            pointer-events: auto;
+            cursor: pointer;
+            z-index: 1000;
+            animation: float 2s infinite ease-in-out;
+        }
+        .power-up-freeze {
+            background: linear-gradient(135deg, #00ffff, #0000ff);
+            box-shadow: 0 0 10px #00ffff;
+        }
+        .power-up-multiply {
+            background: linear-gradient(135deg, #ff00ff, #ff0000);
+            box-shadow: 0 0 10px #ff00ff;
+        }
+        .power-up-giant {
+            background: linear-gradient(135deg, #ffff00, #ff8800);
+            box-shadow: 0 0 10px #ffff00;
+        }
+        /* Premium button frozen effect */
+        .frozen-button {
+            filter: brightness(1.5) hue-rotate(180deg);
+            pointer-events: none;
+            opacity: 0.8;
+        }
+        /* Premium score multiplier */
+        .score-multiplier {
+            position: fixed;
+            top: 120px;
+            right: 20px;
+            background: linear-gradient(45deg, #ff00ff, #ff0000);
+            padding: 5px 15px;
+            border-radius: 15px;
+            color: white;
+            font-weight: bold;
+            display: none;
+            z-index: 1000;
+        }
+        /* Premium combo meter */
+        .combo-meter {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px 20px;
+            border-radius: 20px;
+            color: white;
+            font-weight: bold;
+            display: none;
+            z-index: 1000;
+        }
+        .combo-meter-fill {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            background: linear-gradient(90deg, #ff0000, #ff00ff);
+            border-radius: 20px;
+            width: 0%;
+            z-index: -1;
+            transition: width 0.3s;
+        }
+        /* New button effects */
+        @keyframes jelly {
+            0%, 100% { transform: scale(1, 1); }
+            25% { transform: scale(0.95, 1.05); }
+            50% { transform: scale(1.05, 0.95); }
+            75% { transform: scale(0.95, 1.05); }
+        }
+        @keyframes wobble {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-5deg); }
+            75% { transform: rotate(5deg); }
+        }
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-5px, 5px); }
+            40% { transform: translate(5px, -5px); }
+            60% { transform: translate(-5px, -5px); }
+            80% { transform: translate(5px, 5px); }
+            100% { transform: translate(0); }
+        }
+        @keyframes neon-pulse {
+            0%, 100% { 
+                text-shadow: 0 0 7px #fff,
+                0 0 10px #fff,
+                0 0 21px #fff,
+                0 0 42px #0fa,
+                0 0 82px #0fa,
+                0 0 92px #0fa,
+                0 0 102px #0fa,
+                0 0 151px #0fa;
+            }
+            50% { 
+                text-shadow: 0 0 4px #fff,
+                0 0 7px #fff,
+                0 0 13px #fff,
+                0 0 25px #0fa,
+                0 0 45px #0fa,
+                0 0 55px #0fa,
+                0 0 70px #0fa,
+                0 0 100px #0fa;
+            }
+        }
+        @keyframes liquid {
+            0% { border-radius: 60% 40% 30% 70%/60% 30% 70% 40%; }
+            50% { border-radius: 30% 60% 70% 40%/50% 60% 30% 60%; }
+            100% { border-radius: 60% 40% 30% 70%/60% 30% 70% 40%; }
+        }
+        .premium .jelly-effect {
+            animation: jelly 0.5s ease;
+        }
+        .premium .wobble-effect {
+            animation: wobble 0.5s ease;
+        }
+        .premium .glitch-effect {
+            animation: glitch 0.3s ease;
+        }
+        .premium .neon-effect {
+            animation: neon-pulse 1.5s ease-in-out infinite;
+            color: #fff;
+        }
+        .premium .liquid-effect {
+            animation: liquid 4s ease-in-out infinite;
+        }
+        .premium .matrix-text {
+            color: #0f0;
+            text-shadow: 0 0 5px #0f0;
+            font-family: 'Courier New', monospace;
+        }
+        .premium .hologram {
+            position: relative;
+            overflow: hidden;
+        }
+        .premium .hologram::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent 20%,
+                rgba(255,255,255,0.1) 20%,
+                rgba(255,255,255,0.1) 40%,
+                transparent 40%,
+                transparent 60%,
+                rgba(255,255,255,0.1) 60%,
+                rgba(255,255,255,0.1) 80%,
+                transparent 80%
+            );
+            animation: hologram-rotate 4s linear infinite;
+        }
+        @keyframes hologram-rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .premium .pixel-effect {
+            image-rendering: pixelated;
+            font-family: 'Press Start 2P', cursive;
+            text-shadow: 2px 2px 0 #000;
+        }
+        /* Button state effects */
+        .premium .button-angry {
+            background: #ff0000 !important;
+            transform: scale(1.2);
+            box-shadow: 0 0 20px #ff0000;
+        }
+        .premium .button-happy {
+            background: #00ff00 !important;
+            transform: scale(0.9);
+            box-shadow: 0 0 20px #00ff00;
+        }
+        .premium .button-dizzy {
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        /* Button chaos movement */
+        @keyframes chaos-move {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(var(--rand-x1), var(--rand-y1)) rotate(90deg); }
+            50% { transform: translate(var(--rand-x2), var(--rand-y2)) rotate(180deg); }
+            75% { transform: translate(var(--rand-x3), var(--rand-y3)) rotate(270deg); }
+        }
+        .premium .chaos-mode {
+            --rand-x1: 0px;
+            --rand-y1: 0px;
+            --rand-x2: 0px;
+            --rand-y2: 0px;
+            --rand-x3: 0px;
+            --rand-y3: 0px;
+            position: absolute;
+            animation: chaos-move 2s ease-in-out;
+        }
+        /* Additional ad types */
+        .corner-ad {
+            position: fixed;
+            width: 150px;
+            height: 150px;
+            background: white;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-size: 12px;
+            z-index: 97;
+            transform-origin: center;
+            animation: pulse-grow 2s infinite;
+        }
+        .corner-ad.top-left { top: 0; left: 0; }
+        .corner-ad.top-right { top: 0; right: 0; }
+        .corner-ad.bottom-left { bottom: 0; left: 0; }
+        .corner-ad.bottom-right { bottom: 0; right: 0; }
+        
+        @keyframes pulse-grow {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .video-ad {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 300px;
+            background: black;
+            border-radius: 10px;
+            overflow: hidden;
+            z-index: 98;
+        }
+        
+        .scrolling-ad {
+            position: fixed;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(90deg, #ff0000, #ff6b6b);
+            color: white;
+            padding: 5px 0;
+            white-space: nowrap;
+            overflow: hidden;
+            z-index: 96;
+        }
+        .scrolling-ad p {
+            animation: scroll-text 20s linear infinite;
+            margin: 0;
+            padding-left: 100%;
+        }
+        @keyframes scroll-text {
+            from { transform: translateX(0); }
+            to { transform: translateX(-100%); }
+        }
+
+        .sticky-ad {
+            position: fixed;
+            width: 50px;
+            height: 200px;
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            cursor: pointer;
+            transition: width 0.3s;
+            z-index: 95;
+        }
+        .sticky-ad:hover {
+            width: 200px;
+        }
+        .sticky-ad.left { left: 0; top: 50%; transform: translateY(-50%); }
+        .sticky-ad.right { right: 0; top: 50%; transform: translateY(-50%); }
+
+        .modal-ad {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.3);
+            z-index: 1001;
+            text-align: center;
+            opacity: 0;
+            transition: all 0.3s;
+        }
+        .modal-ad.show {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+        }
+
+        /* Enhanced button movements */
+        @keyframes zigzag {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(var(--zigzag-x1), var(--zigzag-y1)); }
+            50% { transform: translate(var(--zigzag-x2), var(--zigzag-y2)); }
+            75% { transform: translate(var(--zigzag-x3), var(--zigzag-y3)); }
+        }
+        
+        @keyframes spiral {
+            from { transform: rotate(0deg) translateX(var(--spiral-radius)) rotate(0deg); }
+            to { transform: rotate(360deg) translateX(var(--spiral-radius)) rotate(-360deg); }
+        }
+        
+        @keyframes bounce-around {
+            0% { transform: translate(0, 0); }
+            25% { transform: translate(var(--bounce-x), var(--bounce-y)) scale(0.8); }
+            50% { transform: translate(var(--bounce-x2), var(--bounce-y2)) scale(1.2); }
+            75% { transform: translate(var(--bounce-x3), var(--bounce-y3)) scale(0.9); }
+            100% { transform: translate(0, 0) scale(1); }
+        }
+        
+        @keyframes shake-violently {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(10px, 10px) rotate(5deg); }
+            50% { transform: translate(-10px, -10px) rotate(-5deg); }
+            75% { transform: translate(-10px, 10px) rotate(5deg); }
+        }
+
+        .premium .zigzag-mode {
+            animation: zigzag 3s ease-in-out;
+        }
+        
+        .premium .spiral-mode {
+            animation: spiral 2s linear;
+        }
+        
+        .premium .bounce-mode {
+            animation: bounce-around 2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        
+        .premium .shake-mode {
+            animation: shake-violently 0.5s infinite;
+        }
+
+        /* Fake video player */
+        .video-player {
+            width: 100%;
+            height: 169px;
+            background: #000;
+            position: relative;
+        }
+        .video-controls {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 30px;
+            background: rgba(0,0,0,0.7);
+            display: flex;
+            align-items: center;
+            padding: 0 10px;
+        }
+        .progress-bar {
+            flex-grow: 1;
+            height: 5px;
+            background: #666;
+            margin: 0 10px;
+        }
+        .progress-bar div {
+            width: 30%;
+            height: 100%;
+            background: red;
+        }
+        /* Tone down ads */
+        .ad-container, .corner-ad, .video-ad, .scrolling-ad, .sticky-ad {
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+        .ad-container:hover, .corner-ad:hover, .video-ad:hover, .scrolling-ad:hover, .sticky-ad:hover {
+            opacity: 0.4;
+        }
+        
+        /* New complex button patterns */
+        @keyframes figure-eight {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(var(--f8-x), var(--f8-y)) rotate(90deg); }
+            50% { transform: translate(0, var(--f8-y2)) rotate(180deg); }
+            75% { transform: translate(var(--f8-x), var(--f8-y)) rotate(270deg); }
+        }
+        
+        @keyframes orbit {
+            from { transform: rotate(var(--orbit-start)) translateX(var(--orbit-radius)) rotate(calc(var(--orbit-start) * -1)); }
+            to { transform: rotate(var(--orbit-end)) translateX(var(--orbit-radius)) rotate(calc(var(--orbit-end) * -1)); }
+        }
+        
+        @keyframes elastic {
+            0% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(var(--elastic-x1), var(--elastic-y1)) scale(1.2); }
+            50% { transform: translate(var(--elastic-x2), var(--elastic-y2)) scale(0.8); }
+            75% { transform: translate(var(--elastic-x3), var(--elastic-y3)) scale(1.1); }
+            100% { transform: translate(var(--elastic-x4), var(--elastic-y4)) scale(1); }
+        }
+        
+        @keyframes pendulum {
+            0% { transform: rotate(var(--pendulum-angle)) translateY(0); }
+            25% { transform: rotate(calc(var(--pendulum-angle) * -0.5)) translateY(var(--pendulum-drop)); }
+            50% { transform: rotate(calc(var(--pendulum-angle) * -1)) translateY(0); }
+            75% { transform: rotate(calc(var(--pendulum-angle) * -0.5)) translateY(var(--pendulum-drop)); }
+            100% { transform: rotate(var(--pendulum-angle)) translateY(0); }
+        }
+        
+        @keyframes quantum {
+            0%, 100% { 
+                transform: translate(0, 0) scale(1);
+                opacity: 1;
+            }
+            25% { 
+                transform: translate(var(--quantum-x1), var(--quantum-y1)) scale(0.5);
+                opacity: 0.3;
+            }
+            26% {
+                transform: translate(var(--quantum-x2), var(--quantum-y2)) scale(0.5);
+                opacity: 0.3;
+            }
+            50% {
+                transform: translate(var(--quantum-x2), var(--quantum-y2)) scale(1.5);
+                opacity: 1;
+            }
+            75% {
+                transform: translate(var(--quantum-x3), var(--quantum-y3)) scale(0.7);
+                opacity: 0.5;
+            }
+            76% {
+                transform: translate(var(--quantum-x4), var(--quantum-y4)) scale(0.7);
+                opacity: 0.5;
+            }
+        }
+        
+        @keyframes dna-helix {
+            0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+            25% { transform: translate(var(--dna-x), var(--dna-y)) rotate(90deg) scale(1.2); }
+            50% { transform: translate(var(--dna-x2), 0) rotate(180deg) scale(1); }
+            75% { transform: translate(var(--dna-x), calc(var(--dna-y) * -1)) rotate(270deg) scale(0.8); }
+        }
+
+        .premium .figure-eight-mode {
+            animation: figure-eight 4s cubic-bezier(0.645, 0.045, 0.355, 1) infinite;
+        }
+        
+        .premium .orbit-mode {
+            animation: orbit 3s cubic-bezier(0.445, 0.050, 0.550, 0.950) infinite;
+        }
+        
+        .premium .elastic-mode {
+            animation: elastic 2s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+        }
+        
+        .premium .pendulum-mode {
+            transform-origin: top center;
+            animation: pendulum 2.5s cubic-bezier(0.445, 0.050, 0.550, 0.950) infinite;
+        }
+        
+        .premium .quantum-mode {
+            animation: quantum 3s cubic-bezier(0.19, 1, 0.22, 1) infinite;
+        }
+        
+        .premium .dna-mode {
+            animation: dna-helix 4s cubic-bezier(0.445, 0.050, 0.550, 0.950) infinite;
+        }
+
+        /* Button trail effects */
+        .premium .quantum-trail {
+            position: absolute;
+            pointer-events: none;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%);
+            animation: fade-out 1s ease-out forwards;
+        }
+        
+        @keyframes fade-out {
+            to { transform: scale(2); opacity: 0; }
+        }
+
+        /* Additional movement patterns */
+        @keyframes vortex {
+            0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+            50% { transform: translate(var(--vortex-x), var(--vortex-y)) rotate(540deg) scale(0.5); }
+            75% { transform: translate(calc(var(--vortex-x) * -0.5), calc(var(--vortex-y) * -0.5)) rotate(720deg) scale(1.5); }
+        }
+
+        @keyframes constellation {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            20% { transform: translate(var(--const-x1), var(--const-y1)) scale(0.8); }
+            40% { transform: translate(var(--const-x2), var(--const-y2)) scale(1.2); }
+            60% { transform: translate(var(--const-x3), var(--const-y3)) scale(0.9); }
+            80% { transform: translate(var(--const-x4), var(--const-y4)) scale(1.1); }
+        }
+
+        @keyframes matrix-glitch {
+            0%, 100% { 
+                clip-path: inset(0 0 0 0);
+                transform: translate(0) scale(1);
+            }
+            10%, 30% { 
+                clip-path: inset(var(--glitch-clip1));
+                transform: translate(var(--glitch-x1), var(--glitch-y1)) scale(1.1);
+            }
+            40%, 60% { 
+                clip-path: inset(var(--glitch-clip2));
+                transform: translate(var(--glitch-x2), var(--glitch-y2)) scale(0.9);
+            }
+            70%, 90% { 
+                clip-path: inset(var(--glitch-clip3));
+                transform: translate(var(--glitch-x3), var(--glitch-y3)) scale(1.2);
+            }
+        }
+
+        @keyframes magnetic {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(var(--mag-x1), var(--mag-y1)) scale(1.2); }
+            50% { transform: translate(var(--mag-x2), var(--mag-y2)) scale(0.8); }
+            75% { transform: translate(var(--mag-x3), var(--mag-y3)) scale(1.1); }
+        }
+
+        @keyframes wave-rider {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(var(--wave-x), var(--wave-y)) rotate(var(--wave-rot1)); }
+            50% { transform: translate(var(--wave-x2), var(--wave-y2)) rotate(var(--wave-rot2)); }
+            75% { transform: translate(var(--wave-x3), var(--wave-y3)) rotate(var(--wave-rot3)); }
+            100% { transform: translate(0, 0) rotate(360deg); }
+        }
+
+        @keyframes black-hole {
+            0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+            50% { 
+                transform: translate(var(--hole-x), var(--hole-y)) scale(0.1) rotate(360deg);
+                opacity: 0.3;
+            }
+            51% {
+                transform: translate(calc(var(--hole-x) * -1), calc(var(--hole-y) * -1)) scale(0.1) rotate(360deg);
+                opacity: 0.3;
+            }
+            100% { transform: translate(0, 0) scale(1) rotate(720deg); }
+        }
+
+        .premium .vortex-mode {
+            animation: vortex 3s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+        }
+
+        .premium .constellation-mode {
+            animation: constellation 5s cubic-bezier(0.445, 0.050, 0.550, 0.950) infinite;
+        }
+
+        .premium .matrix-glitch-mode {
+            animation: matrix-glitch 2s step-end infinite;
+        }
+
+        .premium .magnetic-mode {
+            animation: magnetic 4s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+        }
+
+        .premium .wave-rider-mode {
+            animation: wave-rider 6s cubic-bezier(0.445, 0.050, 0.550, 0.950) infinite;
+        }
+
+        .premium .black-hole-mode {
+            animation: black-hole 4s cubic-bezier(0.19, 1, 0.22, 1) infinite;
+        }
+
+        /* Enhanced trail effects */
+        .premium .star-trail {
+            position: absolute;
+            pointer-events: none;
+            width: 4px;
+            height: 4px;
+            background: gold;
+            border-radius: 50%;
+            opacity: 0.8;
+            animation: star-fade 1s ease-out forwards;
+        }
+
+        .premium .energy-field {
+            position: absolute;
+            pointer-events: none;
+            border-radius: 50%;
+            background: radial-gradient(circle, 
+                rgba(255,215,0,0.3) 0%, 
+                rgba(255,215,0,0) 70%);
+            animation: energy-pulse 1.5s ease-out infinite;
+        }
+
+        @keyframes star-fade {
+            to { transform: scale(0.1); opacity: 0; }
+        }
+
+        @keyframes energy-pulse {
+            0% { transform: scale(1); opacity: 0.3; }
+            100% { transform: scale(2); opacity: 0; }
+        }
+
+        /* Refined ad system */
+        .ad-container, .corner-ad, .video-ad, .scrolling-ad, .sticky-ad {
+            opacity: 0.7;
+            transition: all 0.5s;
+            filter: grayscale(50%);
+        }
+
+        .ad-container:hover, .corner-ad:hover, .video-ad:hover, .scrolling-ad:hover, .sticky-ad:hover {
+            opacity: 0.9;
+            filter: grayscale(0%);
+            transform: scale(0.98);
+        }
+
+        .ad-close-button {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: rgba(0,0,0,0.3);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            transition: all 0.3s;
+        }
+
+        .ad-close-button:hover {
+            background: rgba(0,0,0,0.5);
+            transform: scale(1.1);
+        }
+
+        .ad-minimize {
+            transform: scale(0.3);
+            opacity: 0.3;
+        }
+
+        /* Ad removal animation */
+        @keyframes ad-farewell {
+            0% { transform: scale(1); opacity: 0.7; }
+            50% { transform: scale(1.1) rotate(5deg); opacity: 0.5; }
+            100% { transform: scale(0); opacity: 0; }
+        }
+
+        .ad-farewell {
+            animation: ad-farewell 1s ease-out forwards;
+        }
+
+        .milestone-notification {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            padding: 20px;
+            border-radius: 15px;
+            color: white;
+            text-align: center;
+            z-index: 1002;
+            opacity: 0;
+            transition: all 0.5s;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+        }
+
+        .milestone-notification.show {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+        }
+
+        .milestone-notification h2 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .milestone-notification p {
+            margin: 10px 0;
+        }
+
+        /* Progress tracker styles - updated */
+        .progress-tracker {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.9);
+            padding: 10px 20px;
+            color: white;
+            font-size: 14px;
+            z-index: 1000;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            border-bottom: 2px solid #FFD700;
+        }
+
+        .progress-tracker h3 {
+            margin: 0 0 10px 0;
+            color: #FFD700;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .milestone-list {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            max-width: 100%;
+            padding: 10px 0;
+            scrollbar-width: thin;
+            scrollbar-color: #FFD700 rgba(255, 255, 255, 0.1);
+            -ms-overflow-style: none;
+        }
+
+        .milestone-list::-webkit-scrollbar {
+            height: 4px;
+        }
+
+        .milestone-list::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+        }
+
+        .milestone-list::-webkit-scrollbar-thumb {
+            background: #FFD700;
+            border-radius: 2px;
+        }
+
+        .milestone-item {
+            flex: 0 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            opacity: 0.7;
+            transition: all 0.3s;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 8px 15px;
+            border-radius: 8px;
+            min-width: 120px;
+            position: relative;
+        }
+
+        .milestone-item.achieved {
+            opacity: 1;
+            background: rgba(144, 238, 144, 0.1);
+            border: 1px solid rgba(144, 238, 144, 0.3);
+        }
+
+        .milestone-item.next {
+            opacity: 1;
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            animation: pulse-milestone 2s infinite;
+        }
+
+        @keyframes pulse-milestone {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .milestone-icon {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        .milestone-clicks {
+            font-weight: bold;
+            color: #FFD700;
+        }
+
+        .milestone-label {
+            font-size: 12px;
+            text-align: center;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 100%;
+        }
+
+        .milestone-progress {
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            margin-top: 5px;
+            overflow: hidden;
+        }
+
+        .milestone-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #FFD700, #FFA500);
+            border-radius: 2px;
+            width: 0%;
+            transition: width 0.3s;
+        }
+
+        /* Adjust top margin of other elements to account for fixed header */
+        .warning {
+            margin-top: 120px;
+        }
+
+        #premium-button {
+            top: 70px;
+        }
+
+        .streak-indicator {
+            top: 120px;
+        }
+
+        .streak-bonus {
+            position: fixed;
+            color: #FFD700;
+            font-weight: bold;
+            pointer-events: none;
+            z-index: 1001;
+            animation: float-up 1s ease-out forwards;
+        }
+
+        @keyframes float-up {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-50px); opacity: 0; }
+        }
+
+        /* Quick stats panel */
+        .quick-stats {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px;
+            border-radius: 10px;
+            color: white;
+            font-size: 14px;
+            z-index: 1000;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 18px;
+            color: #FFD700;
+            margin-top: 5px;
+        }
+
+        /* Screen effects */
+        .screen-shake {
+            animation: screen-shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+            transform: translate3d(0, 0, 0);
+            backface-visibility: hidden;
+            perspective: 1000px;
+        }
+
+        @keyframes screen-shake {
+            0%, 100% { transform: translate3d(0, 0, 0); }
+            10%, 30%, 50%, 70%, 90% { transform: translate3d(-4px, 0, 0); }
+            20%, 40%, 60%, 80% { transform: translate3d(4px, 0, 0); }
+        }
+
+        .screen-flash {
+            animation: screen-flash 0.5s;
+            pointer-events: none;
+        }
+
+        @keyframes screen-flash {
+            0%, 100% { background: transparent; }
+            50% { background: rgba(255, 255, 255, 0.3); }
+        }
+
+        .screen-ripple {
+            position: fixed;
+            border-radius: 50%;
+            transform: scale(0);
+            background: radial-gradient(circle, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0) 70%);
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        @keyframes ripple {
+            to { transform: scale(4); opacity: 0; }
+        }
+
+        .screen-tilt {
+            animation: screen-tilt 1s ease-in-out;
+            transform-origin: center;
+        }
+
+        @keyframes screen-tilt {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-2deg); }
+            75% { transform: rotate(2deg); }
+        }
+
+        .screen-zoom {
+            animation: screen-zoom 0.5s ease-in-out;
+            transform-origin: center;
+        }
+
+        @keyframes screen-zoom {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .matrix-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9998;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .glitch-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9997;
+            mix-blend-mode: overlay;
+            animation: glitch-effect 0.3s infinite;
+            opacity: 0;
+        }
+
+        @keyframes glitch-effect {
+            0% { transform: translate(0); }
+            25% { transform: translate(-5px, 5px); }
+            50% { transform: translate(5px, -5px); }
+            75% { transform: translate(-3px, -3px); }
+            100% { transform: translate(0); }
+        }
+
+        .kaleidoscope {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9996;
+            opacity: 0;
+            transition: opacity 0.5s;
+            background: center/cover;
+            mix-blend-mode: overlay;
+        }
+
+        .screen-effects-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9995;
+        }
+
+        /* New 3D perspective effects */
+        @keyframes perspective-flip {
+            0% { transform: perspective(1000px) rotateY(0deg); }
+            100% { transform: perspective(1000px) rotateY(360deg); }
+        }
+
+        @keyframes depth-pulse {
+            0% { transform: perspective(1000px) translateZ(0px); }
+            50% { transform: perspective(1000px) translateZ(100px); }
+            100% { transform: perspective(1000px) translateZ(0px); }
+        }
+
+        @keyframes cube-spin {
+            0% { transform: perspective(1000px) rotateX(0deg) rotateY(0deg); }
+            100% { transform: perspective(1000px) rotateX(360deg) rotateY(360deg); }
+        }
+
+        /* New particle effects */
+        .sparkle-trail {
+            position: absolute;
+            pointer-events: none;
+            width: 6px;
+            height: 6px;
+            background: radial-gradient(circle, #fff 0%, rgba(255,255,255,0) 70%);
+            border-radius: 50%;
+            animation: sparkle-fade 0.8s ease-out forwards;
+        }
+
+        @keyframes sparkle-fade {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(2); opacity: 0.5; }
+            100% { transform: scale(0); opacity: 0; }
+        }
+
+        /* Optimized screen effects */
+        .screen-flash {
+            animation: screen-flash 0.3s;
+            pointer-events: none;
+            mix-blend-mode: overlay;
+        }
+
+        @keyframes screen-flash {
+            0%, 100% { background: transparent; }
+            50% { background: rgba(255, 255, 255, 0.2); }
+        }
+
+        .screen-shake {
+            animation: screen-shake 0.3s cubic-bezier(.36,.07,.19,.97) both;
+            transform: translate3d(0, 0, 0);
+            backface-visibility: hidden;
+            perspective: 1000px;
+        }
+
+        /* New rainbow trail effect */
+        .rainbow-trail {
+            position: absolute;
+            pointer-events: none;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            animation: rainbow-fade 1s linear forwards;
+        }
+
+        @keyframes rainbow-fade {
+            0% { 
+                transform: scale(1);
+                background: red;
+                opacity: 0.8;
+            }
+            20% { 
+                transform: scale(1.2);
+                background: orange;
+                opacity: 0.7;
+            }
+            40% { 
+                transform: scale(1.4);
+                background: yellow;
+                opacity: 0.6;
+            }
+            60% { 
+                transform: scale(1.6);
+                background: green;
+                opacity: 0.5;
+            }
+            80% { 
+                transform: scale(1.8);
+                background: blue;
+                opacity: 0.3;
+            }
+            100% { 
+                transform: scale(2);
+                background: purple;
+                opacity: 0;
+            }
+        }
+
+        /* New shockwave effect */
+        .shockwave {
+            position: fixed;
+            border: 2px solid rgba(255,255,255,0.5);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: shockwave 0.5s ease-out forwards;
+            z-index: 9999;
+        }
+
+        @keyframes shockwave {
+            0% {
+                transform: scale(0);
+                opacity: 1;
+                border-width: 2px;
+            }
+            100% {
+                transform: scale(3);
+                opacity: 0;
+                border-width: 1px;
+            }
+        }
+
+        /* Social Share Container */
+        .social-share {
+            position: fixed;
+            left: 20px;
+            bottom: 20px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .social-share.premium {
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+        }
+    </style>
+</head>
+<body>
+    <button id="premium-button">🌟 GO PREMIUM</button>
+    <div id="special-effects">Special Effects: OFF</div>
+    <div id="rage-meter">Rage Level: 0%</div>
+    <div id="power-bar"><div id="power-fill"></div></div>
+    <h1 class="warning">⚠️ DO NOT CLICK THIS BUTTON ⚠️</h1>
+    <button id="annoying-button">I DARE YOU</button>
+    <div id="click-counter">Clicks: 0</div>
+
+    <div class="ad-banner top">🔥 AMAZING DEALS! Click here to learn more! 🔥</div>
+    <div class="ad-banner bottom">💎 LIMITED TIME OFFER! Don't miss out! 💎</div>
+    
+    <div class="floating-ad">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Crect width='100' height='100' fill='%23FFD700'/%3E%3Ctext x='50' y='50' font-family='Arial' font-size='12' text-anchor='middle' fill='black'%3E💰 WIN NOW! 💰%3C/text%3E%3C/svg%3E" alt="Ad">
+    </div>
+
+    <div class="premium-teaser">
+        <h3>😱 Try Premium!</h3>
+        <p>Watch the button go crazy!</p>
+        <button onclick="testPremium()" class="premium-button">Test Premium</button>
+        <p><small>Test lasts 30 seconds</small></p>
+    </div>
+
+    <div class="ad-popup">
+        <h2>🎉 CONGRATULATIONS! 🎉</h2>
+        <p>You've been selected for a special offer!</p>
+        <button onclick="this.parentElement.style.display='none'">Claim Now!</button>
+    </div>
+    <div class="ad-overlay"></div>
+
+    <div id="premium-benefits">
+        <div class="premium-close">✕</div>
+        <h2>🌟 Premium Features</h2>
+        <div class="premium-price">$4.99 <span>only!</span></div>
+        <div class="premium-features-grid">
+            <div class="premium-feature-card">
+                <div>🚫</div>
+                <p>Ad-Free Experience</p>
+            </div>
+            <div class="premium-feature-card">
+                <div>🎨</div>
+                <p>Custom Themes</p>
+            </div>
+            <div class="premium-feature-card">
+                <div>✨</div>
+                <p>Premium Effects</p>
+            </div>
+            <div class="premium-feature-card">
+                <div>🎵</div>
+                <p>Custom Sounds</p>
+            </div>
+        </div>
+        <ul>
+            <li>Remove all ads forever!</li>
+            <li>Unlock exclusive particle effects!</li>
+            <li>Custom cursor themes!</li>
+            <li>Premium sound effects!</li>
+            <li>Custom button themes!</li>
+            <li>Exclusive achievements!</li>
+            <li>Special power-ups!</li>
+            <li>Save progress!</li>
+            <li>Priority updates!</li>
+        </ul>
+        <div id="premium-timer">Limited Time Offer!</div>
+        <button class="premium-button" onclick="upgradeToPremium()">Upgrade Now!</button>
+    </div>
+    <div class="premium-badge">PREMIUM USER</div>
+    <div id="custom-theme-selector">
+        <select onchange="changeTheme(this.value)">
+            <option value="default">Default Theme</option>
+            <option value="neon">Neon Theme</option>
+            <option value="retro">Retro Theme</option>
+            <option value="cosmic">Cosmic Theme</option>
+        </select>
+    </div>
+    <div class="custom-cursor-dot"></div>
+    <div class="custom-cursor-outline"></div>
+    <div class="score-multiplier">x1</div>
+    <div class="combo-meter">
+        <div class="combo-meter-fill"></div>
+        <span>COMBO: 0</span>
+    </div>
+
+    <div class="corner-ad top-left">
+        <h4>🎮 PLAY NOW!</h4>
+        <p>Best games of 2024!</p>
+    </div>
+    <div class="corner-ad top-right">
+        <h4>💰 EARN MONEY!</h4>
+        <p>Work from home!</p>
+    </div>
+    <div class="corner-ad bottom-left">
+        <h4>🎯 HOT SINGLES!</h4>
+        <p>In your area!</p>
+    </div>
+    <div class="corner-ad bottom-right">
+        <h4>🎁 FREE GIFT!</h4>
+        <p>Claim now!</p>
+    </div>
+
+    <div class="video-ad">
+        <div class="video-player">
+            <div class="video-controls">
+                <span>▶️</span>
+                <div class="progress-bar"><div></div></div>
+                <span>1:30</span>
+            </div>
+        </div>
+        <div style="padding: 10px; color: white;">
+            <h4 style="margin: 0;">🎥 Watch this amazing video!</h4>
+            <p style="margin: 5px 0;">You won't believe what happens next!</p>
+        </div>
+    </div>
+
+    <div class="scrolling-ad">
+        <p>🔥 SUPER HOT DEALS! 💥 AMAZING DISCOUNTS! 🎁 FREE GIFTS! 💰 MAKE MONEY FAST! 🎮 BEST GAMES! 🌟 VIP ACCESS! 🎯 EXCLUSIVE OFFERS! 🎁 WIN BIG!</p>
+    </div>
+
+    <div class="sticky-ad left">
+        <span>S</span>
+        <span>A</span>
+        <span>L</span>
+        <span>E</span>
+        <span>!</span>
+    </div>
+    <div class="sticky-ad right">
+        <span>H</span>
+        <span>O</span>
+        <span>T</span>
+        <span>!</span>
+    </div>
+
+    <div class="modal-ad">
+        <h2>🎉 MEGA OFFER! 🎉</h2>
+        <p>Don't miss this once-in-a-lifetime opportunity!</p>
+        <button onclick="this.parentElement.classList.remove('show')">Learn More</button>
+    </div>
+
+    <div class="social-share">
+        <button class="social-share-button">Share</button>
+    </div>
+
+    <script>
+        let clicks = 0;
+        let rageLevel = 0;
+        let combo = 0;
+        let lastClickTime = 0;
+        let powerLevel = 0;
+        const button = document.getElementById('annoying-button');
+        const counter = document.getElementById('click-counter');
+        const body = document.body;
+        const rageMeter = document.getElementById('rage-meter');
+        const powerFill = document.getElementById('power-fill');
+        let adRemovalMilestones = {
+            25: { type: '.corner-ad.top-left', message: 'First ad removed! Keep clicking!', reward: 'Double points for 30 seconds!' },
+            75: { type: '.corner-ad.top-right', message: 'Another one bites the dust!', reward: 'Rage builds 20% faster!' },
+            150: { type: '.corner-ad.bottom-left', message: 'You\'re on fire! Keep going!', reward: 'Power bar fills 2x faster!' },
+            250: { type: '.corner-ad.bottom-right', message: 'Corner ads cleared!', reward: 'Unlocked new button effects!' },
+            400: { type: '.scrolling-ad', message: 'No more scrolling ads!', reward: 'Combo multiplier increased!' },
+            600: { type: '.sticky-ad', message: 'Sticky ads? Not anymore!', reward: 'Random power-up spawned!' },
+            800: { type: '.video-ad', message: 'Video ads are gone!', reward: 'Temporary premium preview!' },
+            1000: { type: '.ad-banner', message: 'Banner ads eliminated!', reward: 'Special golden button skin!' }
+        };
+        let removedAds = new Set();
+        let clickStreak = 0;
+        let lastStreakTime = Date.now();
+        let streakTimeout;
+        let doublePointsUntil = 0;
+        let stats = {
+            totalClicks: 0,
+            adsRemoved: 0,
+            highestStreak: 0,
+            powerUpsCollected: 0
+        };
+
+        function createProgressTracker() {
+            const tracker = document.createElement('div');
+            tracker.className = 'progress-tracker';
+            tracker.innerHTML = `
+                <h3>🎯 Ad Removal Progress</h3>
+                <div id="milestone-list" class="milestone-list"></div>
+            `;
+            document.body.appendChild(tracker);
+            updateProgressTracker();
+        }
+
+        function updateProgressTracker() {
+            const milestoneList = document.getElementById('milestone-list');
+            if (!milestoneList) return;
+
+            let html = '';
+            let nextMilestoneFound = false;
+
+            Object.entries(adRemovalMilestones).forEach(([milestone, data]) => {
+                const achieved = clicks >= milestone;
+                const isNext = !achieved && !nextMilestoneFound;
+                if (isNext) nextMilestoneFound = true;
+
+                const progress = isNext ? 
+                    Math.min(100, (clicks / milestone) * 100) : 
+                    achieved ? 100 : 0;
+
+                const icon = achieved ? '✅' : isNext ? '🎯' : '⭕';
+
+                html += `
+                    <div class="milestone-item ${achieved ? 'achieved' : ''} ${isNext ? 'next' : ''}">
+                        <div class="milestone-icon">${icon}</div>
+                        <div class="milestone-clicks">${milestone} clicks</div>
+                        <div class="milestone-label">${data.message}</div>
+                        <div class="milestone-progress">
+                            <div class="milestone-progress-fill" style="width: ${progress}%"></div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            milestoneList.innerHTML = html;
+
+            // Auto scroll to next milestone if exists
+            const nextMilestone = milestoneList.querySelector('.next');
+            if (nextMilestone) {
+                const scrollLeft = nextMilestone.offsetLeft - (milestoneList.offsetWidth / 2) + (nextMilestone.offsetWidth / 2);
+                milestoneList.scrollTo({ left: scrollLeft, behavior: 'smooth' });
+            }
+        }
+
+        function showMilestoneNotification(message, reward) {
+            const notification = document.createElement('div');
+            notification.className = 'milestone-notification';
+            notification.innerHTML = `
+                <h2>🎉 Achievement Unlocked!</h2>
+                <p>${message}</p>
+                <div class="milestone-reward">🎁 ${reward}</div>
+                <p><small>Premium users get all ads removed instantly!</small></p>
+            `;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => notification.classList.add('show'), 100);
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => notification.remove(), 500);
+            }, 4000);
+        }
+
+        function updateStreak() {
+            const now = Date.now();
+            if (now - lastStreakTime < 2000) { // 2 seconds window for streak
+                clickStreak++;
+                clearTimeout(streakTimeout);
+            } else {
+                clickStreak = 1;
+            }
+            lastStreakTime = now;
+
+            // Update streak display
+            let streakIndicator = document.querySelector('.streak-indicator');
+            if (!streakIndicator) {
+                streakIndicator = document.createElement('div');
+                streakIndicator.className = 'streak-indicator';
+                document.body.appendChild(streakIndicator);
+            }
+            streakIndicator.textContent = `Streak: ${clickStreak}🔥`;
+
+            // Show streak bonus
+            if (clickStreak % 10 === 0) {
+                const bonus = document.createElement('div');
+                bonus.className = 'streak-bonus';
+                bonus.textContent = `+${clickStreak} bonus!`;
+                bonus.style.left = `${Math.random() * (window.innerWidth - 100)}px`;
+                bonus.style.top = `${Math.random() * (window.innerHeight - 100)}px`;
+                document.body.appendChild(bonus);
+                setTimeout(() => bonus.remove(), 1000);
+            }
+
+            // Reset streak after 2 seconds of inactivity
+            streakTimeout = setTimeout(() => {
+                clickStreak = 0;
+                streakIndicator.style.opacity = '0';
+                setTimeout(() => streakIndicator.remove(), 300);
+            }, 2000);
+
+            // Update stats
+            stats.highestStreak = Math.max(stats.highestStreak, clickStreak);
+        }
+
+        function createQuickStats() {
+            const statsPanel = document.createElement('div');
+            statsPanel.className = 'quick-stats';
+            document.body.appendChild(statsPanel);
+            updateQuickStats();
+        }
+
+        function updateQuickStats() {
+            const statsPanel = document.querySelector('.quick-stats');
+            if (!statsPanel) return;
+
+            statsPanel.innerHTML = `
+                <div class="stat-item">
+                    <div>Total Clicks</div>
+                    <div class="stat-value">${stats.totalClicks}</div>
+                </div>
+                <div class="stat-item">
+                    <div>Ads Removed</div>
+                    <div class="stat-value">${stats.adsRemoved}</div>
+                </div>
+                <div class="stat-item">
+                    <div>Highest Streak</div>
+                    <div class="stat-value">${stats.highestStreak}</div>
+                </div>
+                <div class="stat-item">
+                    <div>Power-ups</div>
+                    <div class="stat-value">${stats.powerUpsCollected}</div>
+                </div>
+            `;
+        }
+
+        function applyMilestoneReward(milestone) {
+            switch(milestone) {
+                case '25':
+                    doublePointsUntil = Date.now() + 30000;
+                    break;
+                case '75':
+                    window.rageMultiplier = 1.2;
+                    break;
+                case '150':
+                    window.powerMultiplier = 2;
+                    break;
+                case '250':
+                    unlockNewEffects();
+                    break;
+                case '400':
+                    window.comboMultiplier = 2;
+                    break;
+                case '600':
+                    spawnRandomPowerUp();
+                    break;
+                case '800':
+                    startPremiumPreview();
+                    break;
+                case '1000':
+                    applyGoldenButtonSkin();
+                    break;
+            }
+        }
+
+        function checkAdRemovalMilestones() {
+            if (isPremium) return;
+
+            Object.entries(adRemovalMilestones).forEach(([milestone, data]) => {
+                if (clicks >= parseInt(milestone) && !removedAds.has(milestone)) {
+                    const ads = document.querySelectorAll(data.type);
+                    ads.forEach(ad => {
+                        ad.classList.add('ad-farewell');
+                        setTimeout(() => ad.remove(), 1000);
+                    });
+                    showMilestoneNotification(data.message, data.reward);
+                    applyMilestoneReward(milestone);
+                    removedAds.add(milestone);
+                    stats.adsRemoved++;
+                    updateQuickStats();
+                }
+            });
+            updateProgressTracker();
+        }
+
+        // Initialize tracking systems
+        createProgressTracker();
+        createQuickStats();
+
+        button.addEventListener('click', (e) => {
+            clicks++;
+            stats.totalClicks++;
+            updateStreak();
+            checkAdRemovalMilestones();
+            updateQuickStats();
+            
+            // Apply double points if active
+            if (Date.now() < doublePointsUntil) {
+                clicks++;
+                stats.totalClicks++;
+            }
+            
+            rageLevel = Math.min(100, Math.floor((clicks / 50) * 100));
+            counter.textContent = `Clicks: ${clicks}`;
+            rageMeter.textContent = `Rage Level: ${rageLevel}%`;
+            
+            // Handle combo system
+            const currentTime = Date.now();
+            if (currentTime - lastClickTime < 500) {
+                combo++;
+                if (combo > 2) {
+                    showComboText(`${combo}x COMBO!`, e.clientX, e.clientY);
+                    sounds.woosh.cloneNode().play();
+                }
+            } else {
+                combo = 0;
+            }
+            lastClickTime = currentTime;
+
+            // Update power bar
+            powerLevel = Math.min(100, powerLevel + 5);
+            powerFill.style.width = powerLevel + '%';
+            if (powerLevel >= 100) {
+                createConfetti();
+                powerLevel = 0;
+                powerFill.style.width = '0%';
+            }
+            
+            // Play sound
+            sounds.pop.cloneNode().play();
+            
+            // Create particles at click position
+            for (let i = 0; i < 5; i++) {
+                createParticle(e.clientX, e.clientY);
+            }
+            
+            // Random effects array
+            const effects = [
+                // Hide cursor temporarily
+                () => { 
+                    document.body.style.cursor = 'none'; 
+                    setTimeout(() => { document.body.style.cursor = 'default'; }, 1000); 
+                },
+                // Move button randomly
+                () => {
+                    const x = Math.random() * (window.innerWidth - button.offsetWidth);
+                    const y = Math.random() * (window.innerHeight - button.offsetHeight);
+                    button.style.position = 'absolute';
+                    button.style.left = `${x}px`;
+                    button.style.top = `${y}px`;
+                    setTimeout(() => {
+                        button.style.position = 'relative';
+                        button.style.left = '';
+                        button.style.top = '';
+                    }, 800);
+                },
+                // Crazy emoji cursor
+                () => { 
+                    const emojis = ['🤪', '😈', '🤡', '👻', '💀', '🎃', '👽', '🤖', '👺', '😱', '🌈', '💫', '⚡️', '🔥'];
+                    const emoji = emojis[Math.floor(Math.random() * emojis.length)];
+                    document.body.style.cursor = `url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'><text x='10' y='25' font-size='20'>${emoji}</text></svg>"), auto`; 
+                },
+                // Change background color
+                () => {
+                    const colors = ['#ffcdd2', '#f8bbd0', '#e1bee7', '#d1c4e9', '#c5cae9', '#bbdefb', '#b2ebf2', '#b2dfdb'];
+                    body.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    setTimeout(() => { body.style.backgroundColor = '#f0f0f0'; }, 500);
+                },
+                // Spin button
+                () => {
+                    button.style.transform = `rotate(${Math.random() * 720 - 360}deg)`;
+                    setTimeout(() => { button.style.transform = ''; }, 500);
+                },
+                // Matrix effect
+                () => createMatrixRain(),
+                // Confetti explosion
+                () => createConfetti(),
+                // Shake everything
+                () => {
+                    document.body.classList.add('shake');
+                    setTimeout(() => document.body.classList.remove('shake'), 500);
+                },
+                // Invert colors
+                () => {
+                    document.body.style.filter = 'invert(100%)';
+                    setTimeout(() => { document.body.style.filter = ''; }, 500);
+                },
+                // Button size change
+                () => {
+                    const sizes = ['0.5', '1.5', '2', '0.8'];
+                    button.style.transform = `scale(${sizes[Math.floor(Math.random() * sizes.length)]})`;
+                    setTimeout(() => { button.style.transform = ''; }, 500);
+                },
+                // Blur vision
+                () => {
+                    document.body.style.filter = 'blur(5px)';
+                    setTimeout(() => { document.body.style.filter = ''; }, 800);
+                },
+                // Mirror world
+                () => {
+                    document.body.style.transform = 'scaleX(-1)';
+                    setTimeout(() => { document.body.style.transform = ''; }, 1000);
+                },
+                // 3D spin
+                () => {
+                    button.classList.add('spin3d');
+                    setTimeout(() => button.classList.remove('spin3d'), 2000);
+                },
+                // Gravity change
+                () => {
+                    document.body.style.transform = 'rotate(180deg)';
+                    setTimeout(() => { document.body.style.transform = ''; }, 1500);
+                },
+                // Float effect
+                () => {
+                    button.classList.add('floating');
+                    setTimeout(() => button.classList.remove('floating'), 3000);
+                }
+            ];
+            
+            // Apply effects based on rage level
+            const numEffects = Math.min(5, Math.floor(rageLevel / 20) + 1);
+            const shuffled = effects.sort(() => 0.5 - Math.random());
+            shuffled.slice(0, numEffects).forEach(effect => effect());
+            
+            // Change button text randomly
+            const messages = [
+                "NOPE!", "STOP IT!", "WHY?!", "SERIOUSLY?!", 
+                "OKAY FINE!", "CLICK MORE!", "OH NO!", 
+                "YOU REBEL!", "PLEASE STOP!", "CAN'T STOP WON'T STOP!",
+                "CHAOS!", "WHAT HAVE YOU DONE?!", "NO REGRETS!",
+                "KEEP GOING!", "YOU'RE CRAZY!", "MADNESS!",
+                "TOO LATE NOW!", "EMBRACE CHAOS!", "THERE'S NO END!",
+                "UNLIMITED POWER!", "CHAOS REIGNS!", "BUTTON GOES BRRR!",
+                "CLICK HARDER!", "MORE CHAOS!", "REALITY BREAKING!"
+            ];
+            button.textContent = messages[Math.floor(Math.random() * messages.length)];
+
+            // Add achievement messages
+            if (clicks === 10) alert("Achievement Unlocked: Persistent Clicker! 🏆");
+            if (clicks === 25) alert("Achievement Unlocked: Button Masher Supreme! 👑");
+            if (clicks === 50) alert("Achievement Unlocked: Unstoppable Force! 💪");
+            if (clicks === 75) alert("Achievement Unlocked: Chaos Bringer! 🌪️");
+            if (clicks === 100) alert("Achievement Unlocked: Button Destruction Master! 💥");
+            if (combo === 10) alert("Achievement Unlocked: Combo Master! ⚡");
+
+            // Add screen effects based on various conditions
+            if (clicks % 10 === 0) {
+                document.body.classList.add('screen-shake');
+                setTimeout(() => document.body.classList.remove('screen-shake'), 500);
+            }
+
+            if (clicks % 25 === 0) {
+                document.body.classList.add('screen-flash');
+                setTimeout(() => document.body.classList.remove('screen-flash'), 500);
+            }
+
+            if (clicks % 50 === 0) {
+                addMatrixEffect(2000);
+            }
+
+            if (clicks % 75 === 0) {
+                document.body.classList.add('screen-tilt');
+                setTimeout(() => document.body.classList.remove('screen-tilt'), 1000);
+            }
+
+            if (clicks % 100 === 0) {
+                addKaleidoscopeEffect(3000);
+            }
+
+            // Add ripple effect at click position
+            addScreenRipple(e.clientX, e.clientY);
+
+            // Random glitch effect (10% chance)
+            if (Math.random() < 0.1) {
+                addGlitchEffect(300);
+            }
+
+            // Screen zoom on high combos
+            if (combo > 5) {
+                document.body.classList.add('screen-zoom');
+                setTimeout(() => document.body.classList.remove('screen-zoom'), 500);
+            }
+
+            // Add enhanced particles with 30% chance
+            if (Math.random() < 0.3) {
+                createEnhancedParticle(e.clientX, e.clientY);
+            }
+            
+            // Add 3D effects for premium users
+            if (isPremium && Math.random() < 0.2) {
+                const effects = ['perspective-flip', 'depth-pulse', 'cube-spin'];
+                const effect = effects[Math.floor(Math.random() * effects.length)];
+                button.style.animation = `${effect} 1s ease-in-out`;
+                setTimeout(() => button.style.animation = '', 1000);
+            }
+            
+            // Optimize screen effects frequency
+            if (clicks % 15 === 0) { // Changed from 10
+                document.body.classList.add('screen-shake');
+                setTimeout(() => document.body.classList.remove('screen-shake'), 300);
+            }
+
+            if (clicks % 30 === 0) { // Changed from 25
+                document.body.classList.add('screen-flash');
+                setTimeout(() => document.body.classList.remove('screen-flash'), 300);
+            }
+
+            if (clicks % 60 === 0) { // Changed from 50
+                addMatrixEffect(1500); // Reduced duration
+            }
+            
+            // Reduce random glitch effect frequency
+            if (Math.random() < 0.05) { // Changed from 0.1
+                addGlitchEffect(200); // Reduced duration
+            }
+        });
+
+        // Sound effects
+        const sounds = {
+            pop: new Audio('data:audio/wav;base64,UklGRqRnAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YYBnAAAAAAEA/v8CAP//AQAAAP7/AgD//wEAAAD+/wIA//8BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//8BAAAA//8BAAAA//8BAAAA//8BAAAA//8BAAAA//8BAAAA'),
+            woosh: new Audio('data:audio/wav;base64,UklGRqRnAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YYBnAAD//wIA/v8DAP3/BAD8/wUA+/8GAPr/BwD5/wgA+P8JAPf/CgD2/wsA9f8MAPX/DAD1/wwA9f8MAPX/DAD1/wwA9f8MAPb/CwD3/woA+P8JAPn/CAD6/wcA+/8GAPz/BQD9/wQA/v8DAP//AgAAAAEAAQAAAAEAAQAAAAEAAQAAAA==')
+        };
+
+        // Create particle trail
+        function createParticle(x, y) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            const size = Math.random() * 20 + 10;
+            particle.style.width = size + 'px';
+            particle.style.height = size + 'px';
+            particle.style.left = x + 'px';
+            particle.style.top = y + 'px';
+            document.body.appendChild(particle);
+            
+            const angle = Math.random() * Math.PI * 2;
+            const velocity = Math.random() * 5 + 2;
+            const dx = Math.cos(angle) * velocity;
+            const dy = Math.sin(angle) * velocity;
+            let opacity = 1;
+            
+            function animate() {
+                if (opacity <= 0) {
+                    particle.remove();
+                    return;
+                }
+                const currentLeft = parseFloat(particle.style.left);
+                const currentTop = parseFloat(particle.style.top);
+                particle.style.left = (currentLeft + dx) + 'px';
+                particle.style.top = (currentTop + dy) + 'px';
+                opacity -= 0.02;
+                particle.style.opacity = opacity;
+                requestAnimationFrame(animate);
+            }
+            animate();
+        }
+
+        // Create combo text
+        function showComboText(text, x, y) {
+            const comboText = document.createElement('div');
+            comboText.id = 'combo-text';
+            comboText.textContent = text;
+            comboText.style.left = x + 'px';
+            comboText.style.top = y + 'px';
+            document.body.appendChild(comboText);
+            
+            let opacity = 1;
+            let yPos = y;
+            
+            function animate() {
+                if (opacity <= 0) {
+                    comboText.remove();
+                    return;
+                }
+                yPos -= 2;
+                opacity -= 0.02;
+                comboText.style.opacity = opacity;
+                comboText.style.top = yPos + 'px';
+                requestAnimationFrame(animate);
+            }
+            animate();
+        }
+
+        // Create confetti
+        function createConfetti() {
+            const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'];
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.width = '10px';
+                confetti.style.height = '10px';
+                confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                document.body.appendChild(confetti);
+                setTimeout(() => confetti.remove(), 5000);
+            }
+        }
+
+        // Matrix rain effect
+        function createMatrixRain() {
+            const canvas = document.createElement('canvas');
+            canvas.style.position = 'fixed';
+            canvas.style.top = '0';
+            canvas.style.left = '0';
+            canvas.style.width = '100%';
+            canvas.style.height = '100%';
+            canvas.style.zIndex = '-1';
+            canvas.style.opacity = '0.1';
+            document.body.appendChild(canvas);
+            
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            
+            const matrix = "ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*()*&^%";
+            const drops = [];
+            const fontSize = 10;
+            const columns = canvas.width / fontSize;
+            
+            for(let i = 0; i < columns; i++) {
+                drops[i] = 1;
+            }
+
+            function draw() {
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.04)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = '#0F0';
+                ctx.font = fontSize + 'px monospace';
+
+                for(let i = 0; i < drops.length; i++) {
+                    const text = matrix[Math.floor(Math.random() * matrix.length)];
+                    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                    if(drops[i] * fontSize > canvas.height && Math.random() > 0.975)
+                        drops[i] = 0;
+                    drops[i]++;
+                }
+            }
+
+            const matrixInterval = setInterval(draw, 33);
+            setTimeout(() => {
+                clearInterval(matrixInterval);
+                canvas.remove();
+            }, 5000);
+        }
+
+        button.addEventListener('mousemove', (e) => {
+            if (rageLevel > 75) {
+                createParticle(e.clientX, e.clientY);
+            }
+        });
+
+        // Premium features
+        let isPremium = false;
+        const premiumButton = document.getElementById('premium-button');
+        const premiumBenefits = document.getElementById('premium-benefits');
+        const specialEffects = document.getElementById('special-effects');
+        const premiumBadge = document.querySelector('.premium-badge');
+        const customThemeSelector = document.getElementById('custom-theme-selector');
+        const cursorDot = document.querySelector('.custom-cursor-dot');
+        const cursorOutline = document.querySelector('.custom-cursor-outline');
+        let specialEffectsEnabled = true;
+        let premiumTimer;
+        let buttonJumpInterval;
+        let currentMultiplier = 1;
+        let comboCount = 0;
+        let powerUpTimeout;
+        let buttonTrails = [];
+        let frozenUntil = 0;
+        let testPremiumTimeout;
+        let adPopupInterval;
+        let isInChaosMode = false;
+
+        // Premium timer countdown
+        function startPremiumTimer() {
+            let minutes = 10;
+            let seconds = 0;
+            const timerElement = document.getElementById('premium-timer');
+            
+            premiumTimer = setInterval(() => {
+                if (seconds === 0) {
+                    if (minutes === 0) {
+                        clearInterval(premiumTimer);
+                        timerElement.textContent = "Offer expired!";
+                        return;
+                    }
+                    minutes--;
+                    seconds = 59;
+                } else {
+                    seconds--;
+                }
+                timerElement.textContent = `Limited Time Offer: ${minutes}:${seconds.toString().padStart(2, '0')}`;
+            }, 1000);
+        }
+
+        // Custom cursor for premium users
+        if (isPremium) {
+            document.addEventListener('mousemove', (e) => {
+                cursorDot.style.display = 'block';
+                cursorOutline.style.display = 'block';
+                
+                cursorDot.style.left = e.clientX + 'px';
+                cursorDot.style.top = e.clientY + 'px';
+                
+                cursorOutline.style.left = e.clientX - 15 + 'px';
+                cursorOutline.style.top = e.clientY - 15 + 'px';
+            });
+        }
+
+        // Theme changer
+        function changeTheme(theme) {
+            switch(theme) {
+                case 'neon':
+                    document.body.style.background = '#000';
+                    button.style.background = '#ff00ff';
+                    button.style.boxShadow = '0 0 20px #ff00ff';
+                    break;
+                case 'retro':
+                    document.body.style.background = '#382800';
+                    button.style.background = '#8bac0f';
+                    button.style.boxShadow = 'none';
+                    break;
+                case 'cosmic':
+                    document.body.style.background = '#000033';
+                    button.style.background = '#4400ff';
+                    button.style.boxShadow = '0 0 30px #4400ff';
+                    break;
+                default:
+                    document.body.style.background = '#f0f0f0';
+                    button.style.background = '#ff4444';
+                    button.style.boxShadow = '0 5px #cc0000';
+            }
+        }
+
+        premiumButton.addEventListener('click', () => {
+            premiumBenefits.style.display = 'block';
+            startPremiumTimer();
+        });
+
+        document.querySelector('.premium-close').addEventListener('click', () => {
+            premiumBenefits.style.display = 'none';
+            if (premiumTimer) clearInterval(premiumTimer);
+        });
+
+        // Show random ad popups
+        function startAdPopups() {
+            if (!isPremium) {
+                adPopupInterval = setInterval(() => {
+                    const popup = document.querySelector('.ad-popup');
+                    const overlay = document.querySelector('.ad-overlay');
+                    popup.style.display = 'block';
+                    overlay.style.display = 'block';
+                    popup.style.left = Math.random() * (window.innerWidth - 400) + 'px';
+                    popup.style.top = Math.random() * (window.innerHeight - 200) + 'px';
+                }, 30000);
+            }
+        }
+
+        // Premium test function
+        function testPremium() {
+            if (testPremiumTimeout) return;
+            
+            const originalIsPremium = isPremium;
+            isPremium = true;
+            document.body.classList.add('premium');
+            
+            // Hide ads temporarily
+            document.querySelectorAll('.ad-container, .ad-banner, .floating-ad, .premium-teaser').forEach(ad => {
+                ad.style.display = 'none';
+            });
+            
+            // Enable chaos mode
+            startChaosMode();
+            
+            // Restore after 30 seconds
+            testPremiumTimeout = setTimeout(() => {
+                isPremium = originalIsPremium;
+                document.body.classList.remove('premium');
+                stopChaosMode();
+                
+                // Show ads again
+                document.querySelectorAll('.ad-container, .ad-banner, .floating-ad, .premium-teaser').forEach(ad => {
+                    ad.style.display = '';
+                });
+                
+                testPremiumTimeout = null;
+            }, 30000);
+        }
+
+        // Chaos mode for button movement
+        function startChaosMode() {
+            if (!isPremium || isInChaosMode) return;
+            isInChaosMode = true;
+            
+            const movements = [
+                {
+                    name: 'figure-eight-mode',
+                    duration: 4000,
+                    prepare: (button, maxX, maxY) => {
+                        const radius = Math.min(maxX, maxY) * 0.3;
+                        button.style.setProperty('--f8-x', `${radius}px`);
+                        button.style.setProperty('--f8-y', `${radius / 2}px`);
+                        button.style.setProperty('--f8-y2', `${radius}px`);
+                    }
+                },
+                {
+                    name: 'orbit-mode',
+                    duration: 3000,
+                    prepare: (button) => {
+                        const radius = Math.random() * 100 + 50;
+                        const startAngle = Math.random() * 360;
+                        const rotations = Math.floor(Math.random() * 3) + 1;
+                        button.style.setProperty('--orbit-radius', `${radius}px`);
+                        button.style.setProperty('--orbit-start', `${startAngle}deg`);
+                        button.style.setProperty('--orbit-end', `${startAngle + 360 * rotations}deg`);
+                    }
+                },
+                {
+                    name: 'elastic-mode',
+                    duration: 2000,
+                    prepare: (button, maxX, maxY) => {
+                        const points = Array.from({length: 4}, () => ({
+                            x: Math.random() * maxX - button.offsetLeft,
+                            y: Math.random() * maxY - button.offsetTop
+                        }));
+                        points.forEach((point, i) => {
+                            button.style.setProperty(`--elastic-x${i+1}`, `${point.x}px`);
+                            button.style.setProperty(`--elastic-y${i+1}`, `${point.y}px`);
+                        });
+                    }
+                },
+                {
+                    name: 'pendulum-mode',
+                    duration: 2500,
+                    prepare: (button) => {
+                        const angle = Math.random() * 30 + 15;
+                        const drop = Math.random() * 100 + 50;
+                        button.style.setProperty('--pendulum-angle', `${angle}deg`);
+                        button.style.setProperty('--pendulum-drop', `${drop}px`);
+                    }
+                },
+                {
+                    name: 'quantum-mode',
+                    duration: 3000,
+                    prepare: (button, maxX, maxY) => {
+                        const points = Array.from({length: 4}, () => ({
+                            x: Math.random() * maxX - button.offsetLeft,
+                            y: Math.random() * maxY - button.offsetTop
+                        }));
+                        points.forEach((point, i) => {
+                            button.style.setProperty(`--quantum-x${i+1}`, `${point.x}px`);
+                            button.style.setProperty(`--quantum-y${i+1}`, `${point.y}px`);
+                        });
+                        
+                        // Add quantum trails
+                        const trail = document.createElement('div');
+                        trail.className = 'quantum-trail';
+                        trail.style.left = `${button.offsetLeft}px`;
+                        trail.style.top = `${button.offsetTop}px`;
+                        trail.style.width = `${button.offsetWidth}px`;
+                        trail.style.height = `${button.offsetHeight}px`;
+                        document.body.appendChild(trail);
+                        setTimeout(() => trail.remove(), 1000);
+                    }
+                },
+                {
+                    name: 'dna-mode',
+                    duration: 4000,
+                    prepare: (button, maxX, maxY) => {
+                        const radiusX = Math.min(maxX, maxY) * 0.3;
+                        const radiusY = radiusX * 0.5;
+                        button.style.setProperty('--dna-x', `${radiusX}px`);
+                        button.style.setProperty('--dna-y', `${radiusY}px`);
+                        button.style.setProperty('--dna-x2', `${radiusX * 2}px`);
+                    }
+                },
+                {
+                    name: 'vortex-mode',
+                    duration: 3000,
+                    prepare: (button, maxX, maxY) => {
+                        const radius = Math.min(maxX, maxY) * 0.4;
+                        button.style.setProperty('--vortex-x', `${radius}px`);
+                        button.style.setProperty('--vortex-y', `${radius}px`);
+                    }
+                },
+                {
+                    name: 'constellation-mode',
+                    duration: 5000,
+                    prepare: (button, maxX, maxY) => {
+                        for (let i = 1; i <= 4; i++) {
+                            button.style.setProperty(`--const-x${i}`, `${Math.random() * maxX - maxX/2}px`);
+                            button.style.setProperty(`--const-y${i}`, `${Math.random() * maxY - maxY/2}px`);
+                        }
+                        // Add star trails
+                        createStarTrails(button);
+                    }
+                },
+                {
+                    name: 'matrix-glitch-mode',
+                    duration: 2000,
+                    prepare: (button) => {
+                        for (let i = 1; i <= 3; i++) {
+                            const x = Math.random() * 20 - 10;
+                            const y = Math.random() * 20 - 10;
+                            button.style.setProperty(`--glitch-x${i}`, `${x}px`);
+                            button.style.setProperty(`--glitch-y${i}`, `${y}px`);
+                            button.style.setProperty(`--glitch-clip${i}`, 
+                                `${Math.random()*100}% ${Math.random()*100}% ${Math.random()*100}% ${Math.random()*100}%`);
+                        }
+                    }
+                },
+                {
+                    name: 'magnetic-mode',
+                    duration: 4000,
+                    prepare: (button, maxX, maxY) => {
+                        const points = generateMagneticPoints(maxX, maxY);
+                        points.forEach((point, i) => {
+                            button.style.setProperty(`--mag-x${i+1}`, `${point.x}px`);
+                            button.style.setProperty(`--mag-y${i+1}`, `${point.y}px`);
+                        });
+                        createEnergyField(button);
+                    }
+                },
+                {
+                    name: 'wave-rider-mode',
+                    duration: 6000,
+                    prepare: (button, maxX, maxY) => {
+                        const amplitude = Math.min(maxX, maxY) * 0.3;
+                        for (let i = 1; i <= 3; i++) {
+                            button.style.setProperty(`--wave-x${i}`, `${amplitude * Math.cos(i * Math.PI/2)}px`);
+                            button.style.setProperty(`--wave-y${i}`, `${amplitude * Math.sin(i * Math.PI/2)}px`);
+                            button.style.setProperty(`--wave-rot${i}`, `${i * 120}deg`);
+                        }
+                    }
+                },
+                {
+                    name: 'black-hole-mode',
+                    duration: 4000,
+                    prepare: (button, maxX, maxY) => {
+                        const distance = Math.min(maxX, maxY) * 0.5;
+                        const angle = Math.random() * Math.PI * 2;
+                        button.style.setProperty('--hole-x', `${distance * Math.cos(angle)}px`);
+                        button.style.setProperty('--hole-y', `${distance * Math.sin(angle)}px`);
+                    }
+                }
+            ];
+            
+            function updateButtonPosition() {
+                const maxX = window.innerWidth - button.offsetWidth;
+                const maxY = window.innerHeight - button.offsetHeight;
+                
+                // Select random movement
+                const movement = movements[Math.floor(Math.random() * movements.length)];
+                
+                // Prepare movement if needed
+                if (movement.prepare) {
+                    movement.prepare(button, maxX, maxY);
+                }
+                
+                // Apply movement
+                button.classList.add(movement.name);
+                
+                // Reset after animation
+                setTimeout(() => {
+                    button.classList.remove(movement.name);
+                    button.style.left = `${Math.random() * maxX}px`;
+                    button.style.top = `${Math.random() * maxY}px`;
+                }, movement.duration);
+            }
+            
+            button.addEventListener('click', updateButtonPosition);
+            button.chaosHandler = updateButtonPosition;
+        }
+
+        function stopChaosMode() {
+            isInChaosMode = false;
+            if (button.chaosHandler) {
+                button.removeEventListener('click', button.chaosHandler);
+                button.chaosHandler = null;
+            }
+            button.classList.remove('chaos-mode');
+            button.style.position = '';
+            button.style.left = '';
+            button.style.top = '';
+        }
+
+        // Start ad system
+        startAdPopups();
+
+        // Enhanced premium upgrade
+        function upgradeToPremium() {
+            isPremium = true;
+            document.body.classList.add('premium');
+            premiumBenefits.style.display = 'none';
+            premiumButton.style.display = 'none';
+            premiumBadge.style.display = 'block';
+            specialEffects.style.display = 'block';
+            customThemeSelector.style.display = 'block';
+            document.querySelector('.score-multiplier').style.display = 'block';
+            document.querySelector('.combo-meter').style.display = 'block';
+            
+            // Remove all ads
+            document.querySelectorAll('.ad-container, .ad-banner, .floating-ad, .premium-teaser, .ad-popup, .ad-overlay').forEach(ad => ad.remove());
+            clearInterval(adPopupInterval);
+            
+            // Start premium features
+            startButtonJumping();
+            startChaosMode();
+            setInterval(spawnPowerUp, 10000);
+            
+            // Enable custom cursor
+            cursorDot.style.display = 'block';
+            cursorOutline.style.display = 'block';
+            document.body.classList.add('custom-cursor');
+            
+            alert('Welcome to Premium! You now have access to exclusive features! 🎉');
+        }
+
+        // Toggle special effects
+        specialEffects.addEventListener('click', () => {
+            specialEffectsEnabled = !specialEffectsEnabled;
+            specialEffects.textContent = `Special Effects: ${specialEffectsEnabled ? 'ON' : 'OFF'}`;
+        });
+
+        // Premium particle effect
+        function createPremiumParticle(x, y) {
+            if (!isPremium || !specialEffectsEnabled) return;
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            const size = Math.random() * 30 + 15;
+            particle.style.width = size + 'px';
+            particle.style.height = size + 'px';
+            particle.style.background = `radial-gradient(circle, rgba(255,215,0,1) 0%, rgba(255,215,0,0) 70%)`;
+            particle.style.left = x + 'px';
+            particle.style.top = y + 'px';
+            document.body.appendChild(particle);
+            
+            const angle = Math.random() * Math.PI * 2;
+            const velocity = Math.random() * 8 + 4;
+            const dx = Math.cos(angle) * velocity;
+            const dy = Math.sin(angle) * velocity;
+            let opacity = 1;
+            
+            function animate() {
+                if (opacity <= 0) {
+                    particle.remove();
+                    return;
+                }
+                const currentLeft = parseFloat(particle.style.left);
+                const currentTop = parseFloat(particle.style.top);
+                particle.style.left = (currentLeft + dx) + 'px';
+                particle.style.top = (currentTop + dy) + 'px';
+                opacity -= 0.02;
+                particle.style.opacity = opacity;
+                requestAnimationFrame(animate);
+            }
+            animate();
+        }
+
+        // Enhanced button click handler
+        const originalClickHandler = button.onclick;
+        button.onclick = (e) => {
+            if (isPremium) {
+                if (Date.now() < frozenUntil) return;
+                
+                // Random premium effects
+                const effects = [
+                    'jelly-effect',
+                    'wobble-effect',
+                    'glitch-effect',
+                    'neon-effect',
+                    'liquid-effect',
+                    'matrix-text',
+                    'hologram',
+                    'pixel-effect'
+                ];
+                
+                // Apply 2-3 random effects
+                const numEffects = Math.floor(Math.random() * 2) + 2;
+                const selectedEffects = effects
+                    .sort(() => Math.random() - 0.5)
+                    .slice(0, numEffects);
+                
+                selectedEffects.forEach(effect => {
+                    button.classList.add(effect);
+                    setTimeout(() => button.classList.remove(effect), 1000);
+                });
+                
+                // Button state changes
+                const clickCount = parseInt(counter.textContent.match(/\d+/)[0]);
+                if (clickCount > 50) {
+                    button.classList.add('button-angry');
+                    button.textContent = "STOP CLICKING ME! 😠";
+                    setTimeout(() => {
+                        button.classList.remove('button-angry');
+                        button.textContent = "I DARE YOU";
+                    }, 1000);
+                } else if (clickCount > 25) {
+                    button.classList.add('button-dizzy');
+                    button.textContent = "I'm getting dizzy... 😵";
+                    setTimeout(() => {
+                        button.classList.remove('button-dizzy');
+                        button.textContent = "I DARE YOU";
+                    }, 1000);
+                } else if (clickCount > 10) {
+                    button.classList.add('button-happy');
+                    button.textContent = "More clicks please! 😊";
+                    setTimeout(() => {
+                        button.classList.remove('button-happy');
+                        button.textContent = "I DARE YOU";
+                    }, 1000);
+                }
+                
+                // Existing premium effects
+                button.classList.add('glow-effect');
+                button.style.setProperty('--glow-color', `hsl(${Math.random() * 360}, 100%, 50%)`);
+                setTimeout(() => button.classList.remove('glow-effect'), 500);
+                
+                button.classList.add('size-pulse');
+                setTimeout(() => button.classList.remove('size-pulse'), 500);
+                
+                // Enhanced split effect
+                if (Math.random() < 0.3) {
+                    const numClones = Math.floor(Math.random() * 3) + 2;
+                    for (let i = 0; i < numClones; i++) {
+                        const clone = button.cloneNode(true);
+                        clone.classList.add('button-clone');
+                        clone.style.left = button.offsetLeft + 'px';
+                        clone.style.top = button.offsetTop + 'px';
+                        document.body.appendChild(clone);
+                        
+                        const angle = (Math.PI * 2 * i) / numClones;
+                        const distance = 150;
+                        const targetX = button.offsetLeft + Math.cos(angle) * distance;
+                        const targetY = button.offsetTop + Math.sin(angle) * distance;
+                        
+                        clone.style.transition = 'all 0.8s ease';
+                        clone.style.left = targetX + 'px';
+                        clone.style.top = targetY + 'px';
+                        clone.style.opacity = '0';
+                        clone.style.transform = 'scale(0.5) rotate(360deg)';
+                        
+                        setTimeout(() => clone.remove(), 800);
+                    }
+                }
+                
+                updateCombo();
+                clicks += currentMultiplier;
+                counter.textContent = `Clicks: ${clicks}`;
+            }
+            
+            originalClickHandler.call(this, e);
+        };
+
+        // Premium button jumping behavior
+        function startButtonJumping() {
+            if (!isPremium) return;
+            
+            buttonJumpInterval = setInterval(() => {
+                if (Math.random() < 0.3 && !button.classList.contains('frozen-button')) {
+                    const maxX = window.innerWidth - button.offsetWidth;
+                    const maxY = window.innerHeight - button.offsetHeight;
+                    const newX = Math.random() * maxX;
+                    const newY = Math.random() * maxY;
+                    
+                    button.style.setProperty('--jump-x', `${newX - button.offsetLeft}px`);
+                    button.style.setProperty('--jump-y', `${newY - button.offsetTop}px`);
+                    button.classList.add('jumping-button');
+                    
+                    // Create trail effect
+                    const trail = button.cloneNode(true);
+                    trail.classList.add('button-trail');
+                    trail.style.left = button.offsetLeft + 'px';
+                    trail.style.top = button.offsetTop + 'px';
+                    document.body.appendChild(trail);
+                    buttonTrails.push(trail);
+                    
+                    // Clean up trails
+                    setTimeout(() => {
+                        trail.remove();
+                        buttonTrails = buttonTrails.filter(t => t !== trail);
+                    }, 500);
+                    
+                    setTimeout(() => {
+                        button.style.left = newX + 'px';
+                        button.style.top = newY + 'px';
+                        button.classList.remove('jumping-button');
+                    }, 500);
+                }
+            }, 2000);
+        }
+
+        // Premium power-ups
+        function spawnPowerUp() {
+            if (!isPremium) return;
+            
+            const types = ['freeze', 'multiply', 'giant'];
+            const type = types[Math.random() * types.length];
+            const powerUp = document.createElement('div');
+            powerUp.className = `power-up power-up-${type}`;
+            powerUp.style.left = Math.random() * (window.innerWidth - 30) + 'px';
+            powerUp.style.top = Math.random() * (window.innerHeight - 30) + 'px';
+            
+            powerUp.addEventListener('click', () => {
+                activatePowerUp(type);
+                powerUp.remove();
+            });
+            
+            document.body.appendChild(powerUp);
+            setTimeout(() => powerUp.remove(), 5000);
+        }
+
+        function activatePowerUp(type) {
+            switch(type) {
+                case 'freeze':
+                    button.classList.add('frozen-button');
+                    frozenUntil = Date.now() + 3000;
+                    setTimeout(() => button.classList.remove('frozen-button'), 3000);
+                    break;
+                case 'multiply':
+                    currentMultiplier *= 2;
+                    document.querySelector('.score-multiplier').textContent = `x${currentMultiplier}`;
+                    clearTimeout(powerUpTimeout);
+                    powerUpTimeout = setTimeout(() => {
+                        currentMultiplier = 1;
+                        document.querySelector('.score-multiplier').textContent = `x${currentMultiplier}`;
+                    }, 5000);
+                    break;
+                case 'giant':
+                    button.style.transform = 'scale(2)';
+                    setTimeout(() => button.style.transform = '', 5000);
+                    break;
+            }
+        }
+
+        // Premium combo system
+        function updateCombo() {
+            if (!isPremium) return;
+            
+            const now = Date.now();
+            if (now - lastClickTime < 1000) {
+                comboCount++;
+                const comboMeter = document.querySelector('.combo-meter');
+                const comboFill = document.querySelector('.combo-meter-fill');
+                comboMeter.querySelector('span').textContent = `COMBO: ${comboCount}`;
+                comboFill.style.width = Math.min(100, comboCount * 5) + '%';
+            } else {
+                comboCount = 0;
+            }
+            lastClickTime = now;
+        }
+
+        // Enhanced ad system
+        function startAdSystem() {
+            if (isPremium) return;
+            
+            let adCloseCount = 0;
+            const maxAdCloses = 3;
+            
+            // Add close buttons to ads
+            document.querySelectorAll('.ad-container, .corner-ad, .video-ad').forEach(ad => {
+                const closeBtn = document.createElement('button');
+                closeBtn.className = 'ad-close-button';
+                closeBtn.innerHTML = '×';
+                closeBtn.onclick = (e) => {
+                    e.stopPropagation();
+                    if (adCloseCount < maxAdCloses) {
+                        ad.classList.add('ad-minimize');
+                        adCloseCount++;
+                        
+                        // Restore ad after delay
+                        setTimeout(() => {
+                            ad.classList.remove('ad-minimize');
+                        }, 30000);
+                    } else {
+                        alert('You\'ve reached the maximum number of ad minimizations. Upgrade to Premium to remove ads permanently!');
+                    }
+                };
+                ad.appendChild(closeBtn);
+            });
+            
+            // Reduced frequency of modal ads
+            setInterval(() => {
+                if (Math.random() < 0.1) { // 10% chance
+                    document.querySelector('.modal-ad').classList.add('show');
+                }
+            }, 90000); // Every 90 seconds
+            
+            // Slower video ad progress
+            setInterval(() => {
+                const progress = document.querySelector('.progress-bar div');
+                const width = parseFloat(progress.style.width) || 30;
+                progress.style.width = (width + 0.3) % 100 + '%';
+            }, 1000);
+            
+            // Gentler corner ad animations
+            setInterval(() => {
+                document.querySelectorAll('.corner-ad').forEach(ad => {
+                    if (!ad.classList.contains('ad-minimize')) {
+                        ad.style.transform = `rotate(${Math.random() * 3 - 1.5}deg) scale(${0.97 + Math.random() * 0.06})`;
+                    }
+                });
+            }, 4000);
+        }
+
+        // Start enhanced systems
+        startAdSystem();
+
+        // Helper functions for new effects
+        function createStarTrails(button) {
+            const trail = document.createElement('div');
+            trail.className = 'star-trail';
+            trail.style.left = `${button.offsetLeft + button.offsetWidth/2}px`;
+            trail.style.top = `${button.offsetTop + button.offsetHeight/2}px`;
+            document.body.appendChild(trail);
+            setTimeout(() => trail.remove(), 1000);
+        }
+
+        function createEnergyField(button) {
+            const field = document.createElement('div');
+            field.className = 'energy-field';
+            field.style.left = `${button.offsetLeft - 25}px`;
+            field.style.top = `${button.offsetTop - 25}px`;
+            field.style.width = `${button.offsetWidth + 50}px`;
+            field.style.height = `${button.offsetHeight + 50}px`;
+            document.body.appendChild(field);
+            setTimeout(() => field.remove(), 1500);
+        }
+
+        function generateMagneticPoints(maxX, maxY) {
+            return Array.from({length: 3}, () => ({
+                x: (Math.random() - 0.5) * maxX,
+                y: (Math.random() - 0.5) * maxY
+            }));
+        }
+
+        function removeAllAds() {
+            // Remove all ad elements
+            const adSelectors = [
+                '.corner-ad',
+                '.scrolling-ad',
+                '.sticky-ad',
+                '.video-ad',
+                '.ad-banner',
+                '.ad-popup',
+                '.ad-overlay',
+                '.floating-ad',
+                '.modal-ad',
+                '.premium-teaser'
+            ];
+
+            adSelectors.forEach(selector => {
+                document.querySelectorAll(selector).forEach(ad => {
+                    ad.classList.add('ad-farewell');
+                    setTimeout(() => ad.remove(), 1000);
+                });
+            });
+
+            // Clear intervals for ad-related functions
+            if (window.adPopupInterval) clearInterval(window.adPopupInterval);
+            
+            // Update stats
+            stats.adsRemoved = Object.keys(adRemovalMilestones).length;
+            updateQuickStats();
+            
+            // Show celebration
+            createConfetti();
+            showMilestoneNotification('All ads removed!', 'Enjoy your ad-free experience! 🎉');
+        }
+
+        // Enhanced premium upgrade function
+        function upgradeToPremium() {
+            isPremium = true;
+            document.body.classList.add('premium');
+            premiumBenefits.style.display = 'none';
+            premiumButton.style.display = 'none';
+            premiumBadge.style.display = 'block';
+            specialEffects.style.display = 'block';
+            customThemeSelector.style.display = 'block';
+            document.querySelector('.score-multiplier').style.display = 'block';
+            document.querySelector('.combo-meter').style.display = 'block';
+            
+            // Remove all ads with animation
+            removeAllAds();
+            
+            // Start premium features
+            startButtonJumping();
+            startChaosMode();
+            setInterval(spawnPowerUp, 10000);
+            
+            // Enable custom cursor
+            cursorDot.style.display = 'block';
+            cursorOutline.style.display = 'block';
+            document.body.classList.add('custom-cursor');
+            
+            // Mark all milestones as completed
+            Object.keys(adRemovalMilestones).forEach(milestone => {
+                removedAds.add(milestone);
+            });
+            updateProgressTracker();
+            
+            alert('Welcome to Premium! You now have access to exclusive features! 🎉');
+        }
+
+        // Add keyboard shortcut for testing (Ctrl + Shift + A)
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey && e.shiftKey && e.key === 'A') {
+                removeAllAds();
+            }
+        });
+
+        // Add screen effect functions
+        function createScreenEffects() {
+            const container = document.createElement('div');
+            container.className = 'screen-effects-container';
+            document.body.appendChild(container);
+
+            // Create overlays
+            const matrixOverlay = document.createElement('div');
+            matrixOverlay.className = 'matrix-overlay';
+            container.appendChild(matrixOverlay);
+
+            const glitchOverlay = document.createElement('div');
+            glitchOverlay.className = 'glitch-overlay';
+            container.appendChild(glitchOverlay);
+
+            const kaleidoscope = document.createElement('div');
+            kaleidoscope.className = 'kaleidoscope';
+            container.appendChild(kaleidoscope);
+        }
+
+        function addScreenRipple(x, y) {
+            const ripple = document.createElement('div');
+            ripple.className = 'screen-ripple';
+            ripple.style.left = x + 'px';
+            ripple.style.top = y + 'px';
+            ripple.style.width = '100px';
+            ripple.style.height = '100px';
+            document.body.appendChild(ripple);
+
+            ripple.animate([
+                { transform: 'scale(0)', opacity: 1 },
+                { transform: 'scale(4)', opacity: 0 }
+            ], {
+                duration: 1000,
+                easing: 'ease-out'
+            }).onfinish = () => ripple.remove();
+        }
+
+        function addMatrixEffect(duration = 3000) {
+            const overlay = document.querySelector('.matrix-overlay');
+            const canvas = document.createElement('canvas');
+            canvas.style.width = '100%';
+            canvas.style.height = '100%';
+            overlay.appendChild(canvas);
+            overlay.style.opacity = '1';
+
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*";
+            const fontSize = 14;
+            const columns = canvas.width / fontSize;
+            const drops = Array(Math.floor(columns)).fill(1);
+
+            function drawMatrix() {
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = '#0F0';
+                ctx.font = fontSize + 'px monospace';
+
+                for (let i = 0; i < drops.length; i++) {
+                    const text = chars[Math.floor(Math.random() * chars.length)];
+                    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                    if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                        drops[i] = 0;
+                    }
+                    drops[i]++;
+                }
+            }
+
+            const interval = setInterval(drawMatrix, 33);
+            setTimeout(() => {
+                clearInterval(interval);
+                overlay.style.opacity = '0';
+                setTimeout(() => {
+                    overlay.innerHTML = '';
+                }, 500);
+            }, duration);
+        }
+
+        function addKaleidoscopeEffect(duration = 2000) {
+            const kaleidoscope = document.querySelector('.kaleidoscope');
+            kaleidoscope.style.opacity = '0.5';
+            
+            const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'];
+            let angle = 0;
+            
+            function updateKaleidoscope() {
+                angle = (angle + 2) % 360;
+                const gradient = `conic-gradient(from ${angle}deg, ${colors.join(', ')})`;
+                kaleidoscope.style.background = gradient;
+            }
+
+            const interval = setInterval(updateKaleidoscope, 50);
+            setTimeout(() => {
+                clearInterval(interval);
+                kaleidoscope.style.opacity = '0';
+            }, duration);
+        }
+
+        function addGlitchEffect(duration = 500) {
+            const glitchOverlay = document.querySelector('.glitch-overlay');
+            glitchOverlay.style.opacity = '0.5';
+            
+            setTimeout(() => {
+                glitchOverlay.style.opacity = '0';
+            }, duration);
+        }
+
+        // Initialize screen effects
+        createScreenEffects();
+
+        function createEnhancedParticle(x, y) {
+            const types = ['sparkle', 'rainbow', 'shockwave'];
+            const type = types[Math.floor(Math.random() * types.length)];
+            
+            switch(type) {
+                case 'sparkle':
+                    for(let i = 0; i < 8; i++) {
+                        const sparkle = document.createElement('div');
+                        sparkle.className = 'sparkle-trail';
+                        const angle = (Math.PI * 2 * i) / 8;
+                        const distance = Math.random() * 50 + 20;
+                        sparkle.style.left = (x + Math.cos(angle) * distance) + 'px';
+                        sparkle.style.top = (y + Math.sin(angle) * distance) + 'px';
+                        document.body.appendChild(sparkle);
+                        setTimeout(() => sparkle.remove(), 800);
+                    }
+                    break;
+                    
+                case 'rainbow':
+                    for(let i = 0; i < 6; i++) {
+                        const rainbow = document.createElement('div');
+                        rainbow.className = 'rainbow-trail';
+                        rainbow.style.left = x + 'px';
+                        rainbow.style.top = y + 'px';
+                        document.body.appendChild(rainbow);
+                        setTimeout(() => rainbow.remove(), 1000);
+                    }
+                    break;
+                    
+                case 'shockwave':
+                    const wave = document.createElement('div');
+                    wave.className = 'shockwave';
+                    wave.style.left = (x - 50) + 'px';
+                    wave.style.top = (y - 50) + 'px';
+                    wave.style.width = '100px';
+                    wave.style.height = '100px';
+                    document.body.appendChild(wave);
+                    setTimeout(() => wave.remove(), 500);
+                    break;
+            }
+        }
+
+        // API configuration
+        const API_URL = window.location.hostname === 'localhost' 
+            ? 'http://localhost:3000/api'
+            : `${window.location.origin}/api`;
+
+        // Initialize Stripe with the correct key based on environment
+        const STRIPE_PUBLIC_KEY = window.location.hostname === 'localhost'
+            ? 'pk_test_your_test_key'
+            : 'pk_live_your_live_key';
+        const stripe = Stripe(STRIPE_PUBLIC_KEY);
+    </script>
+</body>
+</html> 
